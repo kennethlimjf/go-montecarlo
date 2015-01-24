@@ -10,7 +10,7 @@ The final projected amount is the average of the final investment amount returne
 
 Set the following variables to that you wish to simulate:
 
-```go
+```golang
 # Initial amount the investment starts with
 begin_amt = 200000
 
