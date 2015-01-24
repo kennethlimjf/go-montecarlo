@@ -10,8 +10,8 @@ func main() {
 	annual_inv := 50000.0
 	years := 10
 
-	portfolio_returns := 0.05
-	portfolio_sd := 0.12
+	portfolio_returns := 0.08
+	portfolio_sd := 0.04
 
 	simulations := 1000000
 
@@ -39,7 +39,7 @@ func calc_total_years_amt(begin_amt float64, p_ret float64, p_sd float64, annual
 	sum := begin_amt
 	for i := 0; i < years; i++ {
 		ret := generate_rand_ret(p_ret, p_sd)
-		sum += calc_annual_amt(begin_amt, ret, annual_inv)
+		sum += calc_annual_returns(sum, ret) + annual_inv
 	}
 	c <- sum
 	close(c)
@@ -50,6 +50,6 @@ func generate_rand_ret(mean, std_dev float64) float64 {
 	return rand.NormFloat64()*std_dev + mean
 }
 
-func calc_annual_amt(amt, ret, invest float64) float64 {
-	return (amt*(1+ret) + invest)
+func calc_annual_returns(amt, ret float64) float64 {
+	return amt * ret
 }
